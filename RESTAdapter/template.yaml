@@ -1,0 +1,63 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  REST Adaptor to the GetWeatherService service
+  
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 30
+
+Resources:
+
+# IAM Role
+  WeatherLambdaIAMRole:
+      Type: "AWS::IAM::Role"
+      Properties:
+          RoleName: WeatherLambdaIAMRole
+          Path: "/"
+          AssumeRolePolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              -
+                Effect: "Allow"
+                Action:
+                  - "sts:AssumeRole"
+                Principal:
+                  Service:
+                    - "lambda.amazonaws.com"
+                    - "apigateway.amazonaws.com"
+
+# IAM Policy
+  WeatherLambdaPolicy:
+    Type: "AWS::IAM::Policy"
+    DependsOn: [WeatherLambdaIAMRole]
+    Properties:
+      PolicyName: WeatherLambdaPolicy
+      Roles: [!Ref WeatherLambdaIAMRole]
+      PolicyDocument:
+        Statement:
+        - Effect: Allow
+          Action: [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents",
+            "lambda:InvokeFunction"
+          ]
+          Resource: ["*"]
+
+# Get Weather REST function and endpoint
+  GetWeatherRESTAdapterFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      FunctionName: GetWeatherRESTAdapter
+      Description: Get location weather data for city in REST format
+      CodeUri: rest-adapter/
+      Handler: app.lambdaHandler
+      Runtime: nodejs12.x
+      Role: !GetAtt WeatherLambdaIAMRole.Arn
+
+Outputs:
+  GetWeatherRESTAdaptorFunction:
+    Description: "Get Weather Rest Lambda Function ARN"
+    Value: !GetAtt GetWeatherRESTAdapterFunction.Arn

@@ -1,0 +1,31 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Get Weather Service SOAP Adapter
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 30
+
+Resources:
+
+# Get Weather REST function and endpoint
+  GetWeatherSOAPAdapterFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      FunctionName: GetWeatherSOAPAdapter
+      Description: Get location weather data for city in SOAP format
+      CodeUri: soap-adapter/
+      Handler: com.home.lambda.SoapApiRequestHandler::handleRequest
+      Runtime: java11
+      Role: !Sub 'arn:aws:iam::${AWS::AccountId}:role/WeatherLambdaIAMRole'
+      MemorySize: 512
+      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+        Variables:
+          FUNCTION_NAME: GetWeatherService
+
+Outputs:
+  GetWeatherSOAPAdapterFunction:
+    Description: "Get Weather Service SOAP format Lambda Function ARN"
+    Value: !GetAtt GetWeatherSOAPAdapterFunction.Arn
