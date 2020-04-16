@@ -27,8 +27,9 @@ This project was developed using these technologies and tools:
 2. Windows 10
 3. Docker Desktop
 4. Visual Studio Code
-5. Git
-6. SoapUI
+5. GitHub
+6. SoapUI - Testing tool to test the SOAP/REST API exposed by the AWS API Gateway
+7. Typora - An excellent markdown document editor using which the README.md files are written.
 
 ## Troubleshooting Tips
 

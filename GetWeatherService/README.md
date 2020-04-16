@@ -41,7 +41,7 @@ Note: Please ensure `lambda-bucket` is unique across AWS
 Deploy the application to AWS. Please note you have to provide capabilities and stack name as below.
 
 ```powershell
-sam deploy --template-file deploy.yaml --capabilities CAPABILITY_IAM --stack-name GetWeatherServiceStack
+sam deploy --template-file deploy.yaml --capabilities CAPABILITY_NAMED_IAM --stack-name GetWeatherServiceStack
 ```
 
 ## Unit Tests
