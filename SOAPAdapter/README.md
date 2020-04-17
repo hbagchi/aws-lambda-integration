@@ -53,7 +53,14 @@ sam deploy --template-file deploy.yaml --capabilities CAPABILITY_NAMED_IAM --sta
    2. Mapping Templates
       1. Request body passthrough => When there are no templates defined (recommended)
       2. Content-Type: 
-         1. application/xml => { "body" : $input.json('$') }
+         
+         1. application/xml => 
+         
+            ```velocity
+            { "body" : $input.json('$') }
+            ```
+         
+            
 
 3. Integration Response - 
 
@@ -61,16 +68,19 @@ sam deploy --template-file deploy.yaml --capabilities CAPABILITY_NAMED_IAM --sta
 
       1. Content-Type: application/xml => 
 
-         `#set($inputRoot = $input.path('$'))
+         ```velocity
+         #set($inputRoot = $input.path('$'))
          <?xml version="1.0" encoding="UTF-8"?>
-         $inputRoot.body`
-
-4. Method Response - 
+         $inputRoot.body
+         ```
+         
+         Method Response - 
 
    1. HTTP Status 200
       1. Response Body for 200
          1. Content-Type: application/soap+xml
          2. Models: Empty
+
 
 *Note:  Go with generated defaults for rest of the attributes in the 4 sections*
 
