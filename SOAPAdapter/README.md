@@ -106,4 +106,13 @@ aws cloudformation delete-stack --stack-name SOAPAdapterStack
    aws configure
    ```
 
-   
+
+## TODO Items
+
+1. In AWS Lambda **Java 11** runtime, `aws-lambda-java-core` or `aws-java-sdk-lambda` are not available by default. Hence, these AWS lambda jars have to be included in the build which adds about `2mb` to the deployable file size. However, the same is not true for **Node.js 12.x** runtime. For NodeJS, the `aws-sdk` is available in the **Node.js 12.x** runtime. So no need to add `aws-sdk`. 
+
+## References
+
+1. [Legacy SOAP API integration with Java, AWS Lambda and AWS API Gateway](https://blog.codecentric.de/en/2016/12/serverless-soap-legacy-api-integration-java-aws-lambda-aws-api-gateway/)
+2. [How to configure Amazon API Gateway as a SOAP webservice passthrough in minutes](https://www.rubix.nl/blogs/how-configure-amazon-api-gateway-soap-webservice-passthrough-minutes/)
+3. [Support SOAP/XML request / response passthrough in API Gateway](https://forums.aws.amazon.com/thread.jspa?threadID=236702)
