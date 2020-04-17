@@ -41,6 +41,18 @@ Deploy the application to AWS. Please note you have to provide capabilities and 
 sam deploy --template-file deploy.yaml --capabilities CAPABILITY_NAMED_IAM --stack-name RESTAdapterStack
 ```
 
+## API Gateway Configuration
+
+1. Method Request - 
+2. Integration Request - 
+   1. Select *Use Lambda Proxy integration*
+3. Integration Response - 
+
+4. Method Response - 
+
+
+*Note:  Go with generated defaults for rest of the attributes in the 4 sections*
+
 ## Unit Tests
 
 Tests are defined in `rest-adaptor/tests` directory . Use NPM to install [Mocha](https://mochajs.org/) and [Chai](https://www.chaijs.com/) to run unit tests.

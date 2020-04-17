@@ -38,3 +38,16 @@ This section lists some trouble shooting tips encountered during development. Pl
 1. While calling the API Gateway from SoapUI one error message appeared often - *{"message":"Missing Authentication Token"}*. This message is misleading since authentication was not enabled. This was owing to an incorrect/invalid API endpoint. 
 2. While invoking the **Get Weather Service** lambda function from the **Rest Adaptor** function in local mode one error appeared now and then - *Security Signature Exception*. This message is confusing as no specific security signature was being used anywhere. On further analysis and going through the Docker Desktop GitHub issues this was resolved by restarting the Docker Desktop service whenever the issue appeared. Apparently a recent Docker Desktop update fixes the problem.
 3. Visual Studio Code uses *PowerShell* as default terminal. I suggest replace it with *git bash* or *cmd* unless you are extremely comfortable with *PowerShell* and its commands.
+
+## TODO Items
+
+This section lists the TODO items to further enhance and enrich the solution
+
+1. AWS Lambda **Layers** - Layers will bundle common artifacts (e.g., code, libraries, etc.) into a separate layer thus facilitating reuse and smaller docker image speeding up container initialization.
+2. Combine weather service adaptors, weather service and weather API gateway into one deployable application stack - `WeatherAdapterStack`
+3. Add API Gateway creation step to SAM template.
+4. While creating **API Gateway** using SAM template, `Method Response` section was getting created without `Models` option. Setting response body HTTP 200 status model to `Empty` is required for the SOAP adaptor to work. However, same issue did not happen when API Gateway was created from AWS Console.
+5. Robust exception handling with appropriate error messaging
+6. Unit tests for adaptors with weather service mock
+7. Message validation using message schemas - XML Schema & JSON Schema
+8. Populate API gateway `description` field through SAM template. I did not find an option to do the same using SAM template. AWS Console provides an entry field for description
