@@ -1,21 +1,18 @@
-##############################
-## Java
-##############################
+# Java generated files
 *.class
 *.jar
 .vscode
 .classpath
 .project
 .settings
-##############################
-## Maven
-##############################
+
+# Maven
 target/
 
-##########################
-
+# aws sam
 .aws-sam
-##########################
+deploy.yaml
+
 # Logs
 logs
 *.log
